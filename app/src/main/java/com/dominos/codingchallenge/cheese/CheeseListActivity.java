@@ -33,7 +33,7 @@ public class CheeseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         result = new ArrayList<>();
         mIntentFilter = new IntentFilter("com.sean.RESULT");
-
+        mTextView = findViewById(R.id.textView);
         Intent serviceIntent = new Intent(this, LoadingService.class);
         startService(serviceIntent);
 

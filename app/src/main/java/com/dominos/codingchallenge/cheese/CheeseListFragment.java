@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.dominos.codingchallenge.cheese.Constants.RESULT_KEY;
 
@@ -44,6 +46,13 @@ public class CheeseListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Collections.sort(mCheeseList, String.CASE_INSENSITIVE_ORDER);
+        /*Collections.sort(mCheeseList, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2);
+            }
+        });*/
         CheeseListAdapter adapter = new CheeseListAdapter(mCheeseList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
