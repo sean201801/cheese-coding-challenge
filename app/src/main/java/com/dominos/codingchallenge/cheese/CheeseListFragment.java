@@ -3,20 +3,52 @@ package com.dominos.codingchallenge.cheese;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.dominos.codingchallenge.cheese.Constants.RESULT_KEY;
+
 public class CheeseListFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private ArrayList<String> mCheeseList;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCheeseList = new ArrayList<>();
+        Bundle bundle = getArguments();
+        if(bundle !=null){
+            mCheeseList = bundle.getStringArrayList(RESULT_KEY);
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list , null);
+
+        View view = inflater.inflate(R.layout.fragment_list,container,false);
+        recyclerView = view.findViewById(R.id.cheese_list_view);
+        return view;
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        CheeseListAdapter adapter = new CheeseListAdapter(mCheeseList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+
     }
 
     public static class CheeseListAdapter extends RecyclerView.Adapter<CheeseListAdapter.ViewHolder>  {
@@ -56,4 +88,5 @@ public class CheeseListFragment extends Fragment {
             }
         }
     }
+
 }
