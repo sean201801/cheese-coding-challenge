@@ -31,10 +31,11 @@ public class CheeseListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         result = new ArrayList<>();
         mIntentFilter = new IntentFilter("com.sean.RESULT");
         mTextView = findViewById(R.id.textView);
-        Intent serviceIntent = new Intent(this, LoadingService.class);
+       Intent serviceIntent = new Intent(this, LoadingService.class);
         startService(serviceIntent);
 
 
